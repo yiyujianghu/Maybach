@@ -21,6 +21,7 @@ class ReidsConfig:
     REDIS_DECODE_RESPONSES = True
     REDIS_EXPIRED_IN_SECONDS = 60 * 60 * 24
 
+
 class MongoConfig:
     """
     mongodb数据库的配置信息
@@ -29,4 +30,14 @@ class MongoConfig:
     MONGO_PORT = 27017
     MONGO_USERNAME = ""
     MONGO_PASSWORD = ""
+
+
+class RabbitmqConfig:
+    """
+    rabbitmq的配置信息
+    """
+    RABBIT_HOST = "127.0.0.1"
+    RABBIT_PORT = 5672
+    RABBIT_USERNAME = "guest"
+    RABBIT_PASSWORD = "guest"
 

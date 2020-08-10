@@ -9,13 +9,13 @@
 Notes:...
 """
 
-from .database_config import ReidsConfig, MongoConfig
+from .database_config import ReidsConfig, MongoConfig, RabbitmqConfig
 
 
 __all__ = ["DataBaseConfig"]
 
 
-class DataBaseConfig(ReidsConfig, MongoConfig):
+class DataBaseConfig(ReidsConfig, MongoConfig, RabbitmqConfig):
     """将各种数据库配置的结果打包成一个标准类"""
     def __new__(cls, *args, **kwargs):
         super().__new__(cls)

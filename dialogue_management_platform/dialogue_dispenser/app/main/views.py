@@ -11,6 +11,7 @@ Notes:...
 
 from . import disperser
 from flask import request, jsonify
+from app.handlers.gate import Gate_of_data
 
 
 @disperser.route("/answer", methods=["POST"])
@@ -20,6 +21,8 @@ def disperse():
     template = request.form.get("template")         # 模版号，query时==-1
     query = request.form.get("query")               # 文字性问题
     click_data = request.form.get("click_data")     # 按钮点选的json数据
+
+    Gate_of_data.set_data(uid, template, query, click_data)
 
     dialogue_answer = "你好，很高兴为您服务～"
     answer_dict = {

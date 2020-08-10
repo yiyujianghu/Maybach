@@ -9,7 +9,7 @@
 Notes:...
 """
 
-from intent_recognition import IntentRecognition
+from .intent_recognition import IntentRecognition
 from sinan import Sinan
 
 class NLU(object):
