@@ -57,6 +57,7 @@ template_dict = {
 from datetime import datetime
 from app.connections import redis_client
 
+
 class SessionInitial(object):
     @classmethod
     def redis_init(cls, uid):

@@ -38,7 +38,7 @@ class RedisConnection(object):
         )
 
     def dialogue_data_initial(self, uid, dialogue_data, force_flush=False):
-        if force_flush or self._redis_client.exists(uid):
+        if force_flush or not self._redis_client.exists(uid):
             self._redis_client.hmset(uid, dialogue_data)
             if self._expired_in_seconds > 0:
                 self._redis_client.expire(uid, self._expired_in_seconds)

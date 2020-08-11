@@ -23,8 +23,10 @@ class QueryHandler(BaseHandler):
 
     def run(self):
         message = NLU.nlu_parse(self._query)
+        print("nlu message: {}".format(message))
         intent = message.get("intent")
-        routing_key = scene_mapping_table.get(intent)
+        routing_key = ".".join([scene_mapping_table.get(intent, {"routing_key", "other"}).get("routing_key"), self._uid])
+        print("routing_key: {}".format(routing_key))
         message.update({"uid":self._uid})
         message_to_send = json.dumps(message)
         rabbitmq_client.send_topic_message("query", routing_key, message_to_send)
