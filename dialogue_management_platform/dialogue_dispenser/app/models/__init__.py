@@ -12,6 +12,7 @@ Notes:...
 from .intent_recognition import IntentRecognition
 from sinan import Sinan
 
+
 class NLU(object):
     @classmethod
     def nlu_parse(cls, query):

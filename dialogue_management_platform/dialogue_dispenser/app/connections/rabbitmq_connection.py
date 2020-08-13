@@ -12,6 +12,11 @@ Notes:...
 import pika
 
 
+def default_callback(ch, method, properties, body):
+    """为了防止消费者信息接收错误，给接收函数赋予缺省值"""
+    print("rabbitmq有新的队列消息：{}".format(body))
+
+
 class RabbitmqConnection(object):
     """
     这里定义了rabbitmq的初始化与基本的发送/接收方法。
@@ -61,7 +66,7 @@ class RabbitmqConnection(object):
             body=message,
         )
 
-    def receive_direct_message(self, exchange_name, queue_name, routing_key, callback):
+    def receive_direct_message(self, exchange_name, queue_name, routing_key, callback=default_callback):
         self._channel.exchange_declare(exchange=exchange_name, exchange_type='direct')
         self._channel.queue_declare(queue=queue_name, exclusive=True)
         self._channel.queue_bind(queue=queue_name, exchange=exchange_name, routing_key=routing_key)
@@ -80,7 +85,7 @@ class RabbitmqConnection(object):
             body=message
         )
 
-    def receive_fanout_message(self, exchange_name, callback):
+    def receive_fanout_message(self, exchange_name, callback=default_callback):
         self._channel.exchange_declare(exchange=exchange_name, exchange_type="fanout")
         current_queue = self._channel.queue_declare(exclusive=True)
         current_queue_name = current_queue.method.queue
@@ -100,7 +105,7 @@ class RabbitmqConnection(object):
             body=message
         )
 
-    def receive_topic_message(self, exchange_name, routing_key_list, callback):
+    def receive_topic_message(self, exchange_name, routing_key_list, callback=default_callback):
         self._channel.exchange_declare(exchange=exchange_name, exchange_type="topic")
         current_queue = self._channel.queue_declare(exclusive=True)
         current_queue_name = current_queue.method.queue

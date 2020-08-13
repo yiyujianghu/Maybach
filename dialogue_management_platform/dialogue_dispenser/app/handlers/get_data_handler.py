@@ -46,3 +46,8 @@ class GetDataHandler(object):
             }
 
         return result
+
+    def clear_answer(self):
+        redis_client.hset(self._uid, "answer", "")
+        redis_client.hset(self._uid, "click_list", [])
+        redis_client.hset(self._uid, "template_id", -1)

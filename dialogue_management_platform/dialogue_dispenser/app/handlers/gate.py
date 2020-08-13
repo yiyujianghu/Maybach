@@ -26,6 +26,7 @@ class Gate_of_data(object):
     def get_data(cls, uid):
         handler = GetDataHandler(uid)
         result = handler.run()
+        handler.clear_answer()
         return result
 
     @classmethod
