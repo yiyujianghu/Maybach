@@ -22,7 +22,7 @@ class IntentRecognition(object):
 
     keywords_dict ={
         "book_before":r"(预约|预订|预定|订|有什么|咨询|问下|问一下)",
-        "restaurant":r"(餐馆|餐厅|饭店|饭馆|馆子)",
+        "restaurant":r"(餐馆|餐厅|饭店|饭馆|馆子|菜|套餐)",
         "hotel":r"(酒店|房间|宾馆|旅店|客栈|旅社)",
         "weather":r"(天气|气温)",
         "weather_description":r"(热不热|冷不冷|下雨|下雪)"

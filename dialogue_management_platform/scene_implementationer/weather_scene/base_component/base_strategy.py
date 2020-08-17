@@ -23,6 +23,4 @@ class BaseStrategy(object):
     * 输出：
         对下一轮状态池的各种状态做打分排序。
     """
-
-    def __call__(self, uid, current_state, slots, *args, **kwargs):
-        raise NotImplementedError
+    pass

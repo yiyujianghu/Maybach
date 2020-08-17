@@ -25,8 +25,12 @@ class BaseState(object):
     """
 
     def __init__(self, process):
-        self.processMachine = process
+        self.process = process
+        self.uid = self.process.uid
         self.next_state_pool = []
+
+    def select_state(self):
+        raise NotImplementedError
 
     def run(self):
         raise NotImplementedError

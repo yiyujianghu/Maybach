@@ -68,6 +68,7 @@ class SessionInitial(object):
         now_time = datetime.now()
         time_str = datetime.strftime(now_time, '%Y-%m-%d %H:%M:%S')
         session_dcit = {
-            "create_time": time_str
+            "create_time": time_str,
+            "intent": "其他",
         }
         redis_client.dialogue_data_initial(uid, session_dcit)

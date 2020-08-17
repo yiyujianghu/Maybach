@@ -9,7 +9,6 @@
 Notes:...
 """
 
-from connections import redis_client
 
 class BaseProcess(object):
     """
@@ -27,18 +26,20 @@ class BaseProcess(object):
         (4) 整体代码封装到外部，然后消费者的callback中调用；
     """
     def __init__(self, uid):
-        self._uid = uid
+        self.uid = uid
         self.current_state = None
         self.state_pool = []
         self.drive_strategy = None
 
     def drive(self):
         """ 策略驱动 """
-        self.current_state = self.drive_strategy()
         raise NotImplementedError
 
     def turn(self):
         """ 机器开动 """
-        self.drive()
-        self.current_state.run()
-        raise NotImplementedError
+        # self.current_state = self.drive()
+        # self.current_state.run()
+        # raise NotImplementedError
+        from connections import redis_client
+        redis_client.set_dialogue_data(self.uid, "answer", "您这里问的是基础场景～")
+

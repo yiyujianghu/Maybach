@@ -11,21 +11,22 @@ Notes:...
 
 import json
 from connections import rabbitmq_client
-from weather_process import WeatherProcess
-
+from book_process import BookProcess
 
 def task_process(ch, method, properties, body):
     # =============== 以下是信息获取的阶段 ===============
     uid = method.routing_key.split(".")[-1]
+    intent = method.routing_key.split(".")[0]
     message = json.loads(body)
-    intent = message.get("intent")
+    # intent = message.get("intent")
     slots = message.get("slots")
     print(intent, slots)
 
     # =============== 以下是任务执行的阶段 ===============
     if uid not in task_pool:
-        task_pool[uid] = WeatherProcess(uid)
+        task_pool[uid] = BookProcess(uid)
 
+    task_pool[uid].set_intent(intent)
     task_pool[uid].set_slots(slots)
     task_pool[uid].turn()
 
@@ -33,4 +34,4 @@ def task_process(ch, method, properties, body):
 if __name__ == "__main__":
     print("场景服务已启动，正在接收生产者分发的消息...")
     task_pool = {}
-    rabbitmq_client.receive_topic_message("query", ["weather.*"], task_process)
+    rabbitmq_client.receive_topic_message("query", ["restaurant.*", "hotel.*"], task_process)

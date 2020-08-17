@@ -31,4 +31,4 @@ def task_process(ch, method, properties, body):
 if __name__ == "__main__":
     print("场景服务已启动，正在接收生产者分发的消息...")
     task_pool = {}
-    rabbitmq_client.receive_topic_message("query", ["scene.*"], task_process)
+    rabbitmq_client.receive_topic_message("query", ["other.*"], task_process)

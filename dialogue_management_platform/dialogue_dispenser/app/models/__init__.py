@@ -23,5 +23,5 @@ class NLU(object):
 
 
 if __name__ == "__main__":
-    result = NLU.nlu_parse("明天的天气怎么样啊")
+    result = NLU.nlu_parse("预订明天上午的两人桌菜")
     print(result)
