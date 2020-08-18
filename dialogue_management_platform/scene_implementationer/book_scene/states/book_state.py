@@ -65,7 +65,6 @@ class AnswerState(BaseState):
         query_time = datetime.strptime(query_time, "%Y-%m-%d")
         delta_days = (query_time-current_time).days
 
-        category_dict = {"restaurant":"饭点", "hotel":"酒店"}
         answer_data_restaurant = [
             [0, 3, 75, "望京南吉野家"],
             [0, 5, 400, "凯德Mall南京大排档"],
@@ -96,11 +95,10 @@ class AnswerState(BaseState):
                      ]
         if len(current_answer_data) > 0:
             answer_data_line = current_answer_data.iloc[0, :]
-            answer = "已帮您预订日期为{data}，{people}人，价格{money}的{category}～酒店".format(
+            answer = "已帮您预订日期为{data}，{people}人，价格{money}的{name}~".format(
                 data=query_time,
                 people=answer_data_line["people"],
                 money=answer_data_line["money"],
-                category=category_dict[self.process.intent],
                 name=answer_data_line["answer"]
             )
         else:
