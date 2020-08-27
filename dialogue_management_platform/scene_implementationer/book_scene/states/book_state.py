@@ -105,6 +105,7 @@ class AnswerState(BaseState):
             answer = "十分抱歉，未能为您查到相关预订信息！"
         redis_client.set_dialogue_data(self.uid, "answer", answer)
 
+        # 短信发送模块，调用线上SAAS接口
         from twilio.rest import Client
 
         account_sid = 'AC233dcbe135621ca3bb9edb6d42878083'
